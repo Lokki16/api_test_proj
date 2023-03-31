@@ -1,11 +1,13 @@
 import 'package:api_test_proj/bloc/authorization/authorization_bloc.dart';
 import 'package:api_test_proj/data/navigation/routes.dart';
+import 'package:api_test_proj/data/repositories/authorization/authorization_repository.dart';
 import 'package:api_test_proj/presentation/widgets/custom_button.dart';
 import 'package:api_test_proj/presentation/widgets/custom_popup.dart';
 import 'package:api_test_proj/presentation/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class AuthorizationPage extends StatelessWidget {
   const AuthorizationPage({super.key});
@@ -44,29 +46,18 @@ class AuthorizationPage extends StatelessWidget {
                           .add(AuthorizationPasswordChangeEvent(password)),
                     ),
                     SizedBox(height: 50.h),
-                    BlocListener<AuthorizationBloc, AuthorizationState>(
-                      listenWhen: (previous, current) => previous != current,
-                      listener: (context, state) {
-                        if (state is AuthorizedState) {
-                          Navigator.of(context)
-                              .pushNamed(AppRoutes.routeToHomePage);
-                        }
-                        if (state is AuthorizedErrorState) {
-                          showSimpleDialog(title: 'Error!');
-                          context
-                              .read<AuthorizationBloc>()
-                              .add(AuthorizationFetchEvent());
-                        }
+                    CustomButton(
+                      width: double.infinity,
+                      text: 'Login',
+                      onPressed: () async {
+                        final authorizationRepository =
+                            AuthorizationRepository();
+                        final status = await authorizationRepository
+                            .postAuthorization(state.username, state.password);
+                        status
+                            ? Get.toNamed(AppRoutes.routeToHomePage)
+                            : showSimpleDialog(title: 'Error!');
                       },
-                      child: CustomButton(
-                        width: double.infinity,
-                        text: 'Login',
-                        onPressed: () async {
-                          context.read<AuthorizationBloc>().add(
-                              AuthorizationSubmittedEvent(
-                                  state.username, state.password));
-                        },
-                      ),
                     ),
                   ],
                 );

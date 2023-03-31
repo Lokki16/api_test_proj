@@ -13,7 +13,3 @@ class AuthorizationLoadedState extends AuthorizationState {
 
   AuthorizationLoadedState({this.username = '', this.password = ''});
 }
-
-class AuthorizedState extends AuthorizationState {}
-
-class AuthorizedErrorState extends AuthorizationState {}

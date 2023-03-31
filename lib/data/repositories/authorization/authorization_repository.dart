@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthorizationRepository {
   final url = 'http://143.198.174.245/Auth/login';
 
-  Future<int> postAuthorization(String username, String password) async {
+  Future<bool> postAuthorization(String username, String password) async {
     try {
       final response = await http.post(Uri.parse(url),
           body: jsonEncode({'username': username, 'password': password}),
@@ -22,7 +22,7 @@ class AuthorizationRepository {
         sharedPreferences.setString('accessToken', accessToken);
       }
 
-      return response.statusCode;
+      return response.statusCode == 200;
     } catch (e) {
       throw Exception(e.toString());
     }

@@ -16,10 +16,3 @@ class AuthorizationPasswordChangeEvent extends AuthorizationEvent {
 
   AuthorizationPasswordChangeEvent(this.password);
 }
-
-class AuthorizationSubmittedEvent extends AuthorizationEvent {
-  final String username;
-  final String password;
-
-  AuthorizationSubmittedEvent(this.username, this.password);
-}

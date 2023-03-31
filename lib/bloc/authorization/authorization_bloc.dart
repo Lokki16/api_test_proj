@@ -1,4 +1,3 @@
-import 'package:api_test_proj/data/repositories/authorization/authorization_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -14,7 +13,6 @@ class AuthorizationBloc extends Bloc<AuthorizationEvent, AuthorizationState> {
     on<AuthorizationFetchEvent>(_fetchEvent);
     on<AuthorizationUsernameChangeEvent>(_usernameChangeEvent);
     on<AuthorizationPasswordChangeEvent>(_passwordChangeEvent);
-    on<AuthorizationSubmittedEvent>(_submittedEvent);
   }
 
   void _fetchEvent(
@@ -39,17 +37,5 @@ class AuthorizationBloc extends Bloc<AuthorizationEvent, AuthorizationState> {
       Emitter<AuthorizationState> emit) async {
     password = event.password;
     emit(AuthorizationLoadedState(username: username, password: password));
-  }
-
-  void _submittedEvent(AuthorizationSubmittedEvent event,
-      Emitter<AuthorizationState> emit) async {
-    final authorizationRepository = AuthorizationRepository();
-    final status = await authorizationRepository.postAuthorization(
-        event.username, event.password);
-    if (status == 200) {
-      emit(AuthorizedState());
-    } else {
-      emit(AuthorizedErrorState());
-    }
   }
 }
