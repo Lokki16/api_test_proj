@@ -20,6 +20,7 @@ class AuthorizationBloc extends Bloc<AuthorizationEvent, AuthorizationState> {
   void _fetchEvent(
       AuthorizationFetchEvent event, Emitter<AuthorizationState> emit) async {
     emit(AuthorizationInitialState());
+
     try {
       await Future.delayed(const Duration(milliseconds: 500));
       emit(AuthorizationLoadedState());
@@ -43,7 +44,7 @@ class AuthorizationBloc extends Bloc<AuthorizationEvent, AuthorizationState> {
   void _submittedEvent(AuthorizationSubmittedEvent event,
       Emitter<AuthorizationState> emit) async {
     final authorizationRepository = AuthorizationRepository();
-    final status = await authorizationRepository.postAuthorizationReq(
+    final status = await authorizationRepository.postAuthorization(
         event.username, event.password);
     if (status == 200) {
       emit(AuthorizedState());

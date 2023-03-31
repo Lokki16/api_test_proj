@@ -1,4 +1,5 @@
 import 'package:api_test_proj/bloc/authorization/authorization_bloc.dart';
+import 'package:api_test_proj/data/navigation/routes.dart';
 import 'package:api_test_proj/presentation/widgets/custom_button.dart';
 import 'package:api_test_proj/presentation/widgets/custom_popup.dart';
 import 'package:api_test_proj/presentation/widgets/custom_textfield.dart';
@@ -47,10 +48,8 @@ class AuthorizationPage extends StatelessWidget {
                       listenWhen: (previous, current) => previous != current,
                       listener: (context, state) {
                         if (state is AuthorizedState) {
-                          showSimpleDialog(title: 'You\'re authorized!');
-                          context
-                              .read<AuthorizationBloc>()
-                              .add(AuthorizationFetchEvent());
+                          Navigator.of(context)
+                              .pushNamed(AppRoutes.routeToHomePage);
                         }
                         if (state is AuthorizedErrorState) {
                           showSimpleDialog(title: 'Error!');

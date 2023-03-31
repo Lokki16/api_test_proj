@@ -1,5 +1,6 @@
 import 'package:api_test_proj/bloc/authorization/authorization_bloc.dart';
-import 'package:api_test_proj/presentation/pages/authorization_page.dart';
+import 'package:api_test_proj/bloc/notification/notification_bloc.dart';
+import 'package:api_test_proj/data/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,14 +11,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: (context, child) => GetMaterialApp(
-        title: 'Test',
-        debugShowCheckedModeBanner: false,
-        home: BlocProvider(
-          create: (context) =>
-              AuthorizationBloc()..add(AuthorizationFetchEvent()),
-          child: const AuthorizationPage(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) =>
+                AuthorizationBloc()..add(AuthorizationFetchEvent())),
+        BlocProvider(
+            create: (context) =>
+                NotificationBloc()..add(NotificationFetchEvent())),
+      ],
+      child: ScreenUtilInit(
+        builder: (context, child) => GetMaterialApp(
+          title: 'Test',
+          navigatorKey: Get.key,
+          routes: AppRoutes.getRoutes,
+          initialRoute: AppRoutes.routeToAuthorizationPage,
+          debugShowCheckedModeBanner: false,
         ),
       ),
     );
