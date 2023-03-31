@@ -19,6 +19,7 @@ dependencies:
   flutter_bloc: ^8.1.2
   json_annotation: ^4.8.0
   flutter_screenutil: ^5.7.0
+  shared_preferences: ^2.0.20
 
 dev_dependencies:
   flutter_test:

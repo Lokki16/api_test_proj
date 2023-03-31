@@ -1,4 +1,4 @@
-import 'package:api_test_proj/data/models/user/notification_model.dart';
+import 'package:api_test_proj/data/models/notification/notification_model.dart';
 import 'package:api_test_proj/data/repositories/notification/notification_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
