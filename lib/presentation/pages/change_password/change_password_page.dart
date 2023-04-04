@@ -14,10 +14,10 @@ class ChangePasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
           child: BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
             builder: (context, state) {
               if (state is ChangePasswordInitialState) {
@@ -58,16 +58,15 @@ class ChangePasswordPage extends StatelessWidget {
                     SizedBox(height: 50.h),
                     CustomButton(
                       width: double.infinity,
-                      text: 'Login',
+                      text: 'Change password',
                       onPressed: () async {
-                        final authorizationRepository =
-                            ChangePasswordRepository();
                         final status =
-                            await authorizationRepository.changePassword(
+                            await ChangePasswordRepository().changePassword(
                           state.currentPassword,
                           state.newPassword,
                           state.passwordConfirm,
                         );
+
                         status
                             ? Get.toNamed(AppRoutes.routeToHomePage)
                             : showSimpleDialog(title: 'Error!');

@@ -50,9 +50,7 @@ class AuthorizationPage extends StatelessWidget {
                       width: double.infinity,
                       text: 'Login',
                       onPressed: () async {
-                        final authorizationRepository =
-                            AuthorizationRepository();
-                        final status = await authorizationRepository
+                        final status = await AuthorizationRepository()
                             .postAuthorization(state.username, state.password);
 
                         status

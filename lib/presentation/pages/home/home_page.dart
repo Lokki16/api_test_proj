@@ -11,15 +11,15 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(actions: [
-          IconButton(
-            onPressed: () => Get.toNamed(AppRoutes.routeToChangePasswordPage),
-            icon: const Icon(Icons.settings),
-          ),
-        ]),
-        body: BlocBuilder<NotificationBloc, NotificationState>(
+    return Scaffold(
+      appBar: AppBar(actions: [
+        IconButton(
+          onPressed: () => Get.toNamed(AppRoutes.routeToChangePasswordPage),
+          icon: const Icon(Icons.settings),
+        ),
+      ]),
+      body: SafeArea(
+        child: BlocBuilder<NotificationBloc, NotificationState>(
           builder: (context, state) {
             if (state is NotificationInitialState) {
               return const Center(child: CircularProgressIndicator());
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
               return SingleChildScrollView(
                 child: Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
                   child: CustomColumn(
                     space: 20,
                     children: [
