@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:api_test_proj/data/models/notification/notification_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:api_test_proj/data/models/notification/notification_model.dart';
 
 class NotificationRepository {
   final _url = 'http://143.198.174.245/api/User/getNotificationsList';

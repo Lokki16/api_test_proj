@@ -1,14 +1,5 @@
-import 'package:api_test_proj/bloc/authorization/authorization_bloc.dart';
-import 'package:api_test_proj/data/navigation/routes.dart';
-import 'package:api_test_proj/data/repositories/authorization/authorization_repository.dart';
-import 'package:api_test_proj/presentation/layout/default_body.dart';
-import 'package:api_test_proj/presentation/widgets/custom_button.dart';
-import 'package:api_test_proj/presentation/widgets/custom_popup.dart';
-import 'package:api_test_proj/presentation/widgets/custom_textfield.dart';
-import 'package:flutter/material.dart';
+import 'package:api_test_proj/presentation/template/template.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class AuthorizationPage extends StatelessWidget {
   const AuthorizationPage({super.key});

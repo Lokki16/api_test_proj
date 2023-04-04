@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:api_test_proj/presentation/template/template.dart';
 
 showSimpleDialog({
   String title = '',

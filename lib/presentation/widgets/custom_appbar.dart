@@ -1,6 +1,4 @@
-import 'package:api_test_proj/data/navigation/routes.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:api_test_proj/presentation/template/template.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

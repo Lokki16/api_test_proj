@@ -1,6 +1,4 @@
-import 'package:api_test_proj/presentation/widgets/custom_appbar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:api_test_proj/presentation/template/template.dart';
 
 class DefaultBody extends StatelessWidget {
   final String title;

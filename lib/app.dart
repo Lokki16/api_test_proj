@@ -1,11 +1,5 @@
-import 'package:api_test_proj/bloc/authorization/authorization_bloc.dart';
-import 'package:api_test_proj/bloc/change_password/change_password_bloc.dart';
-import 'package:api_test_proj/bloc/notification/notification_bloc.dart';
-import 'package:api_test_proj/data/navigation/routes.dart';
-import 'package:flutter/material.dart';
+import 'package:api_test_proj/presentation/template/template.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:api_test_proj/presentation/template/template.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
