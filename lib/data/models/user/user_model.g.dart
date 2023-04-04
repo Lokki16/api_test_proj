@@ -8,8 +8,10 @@ part of 'user_model.dart';
 
 UserModel _$UserModelFromJson(Map json) => UserModel(
       accessToken: json['accessToken'] as String,
+      refreshToken: json['refreshToken'] as String,
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'accessToken': instance.accessToken,
+      'refreshToken': instance.refreshToken,
     };

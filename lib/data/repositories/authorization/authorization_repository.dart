@@ -18,8 +18,11 @@ class AuthorizationRepository {
       if (response.statusCode == 200) {
         final accessToken =
             UserModel.fromJson(json.decode(response.body)).accessToken;
+        final refreshToken =
+            UserModel.fromJson(json.decode(response.body)).refreshToken;
         final sharedPreferences = await SharedPreferences.getInstance();
         sharedPreferences.setString('accessToken', accessToken);
+        sharedPreferences.setString('refreshToken', refreshToken);
       }
 
       return response.statusCode == 200;
