@@ -28,7 +28,7 @@ class ChangePasswordBloc
     emit(ChangePasswordInitialState());
 
     try {
-      emit(ChangePasswordChangeState());
+      emit(ChangePasswordLoadedState());
     } catch (e) {
       emit(ChangePasswordErrorState());
     }
@@ -40,7 +40,7 @@ class ChangePasswordBloc
   ) {
     currentPassword = event.currentPassword;
 
-    emit(ChangePasswordChangeState(
+    emit(ChangePasswordLoadedState(
       currentPassword: currentPassword,
       newPassword: newPassword,
       passwordConfirm: passwordConfirm,
@@ -53,7 +53,7 @@ class ChangePasswordBloc
   ) {
     newPassword = event.newPassword;
 
-    emit(ChangePasswordChangeState(
+    emit(ChangePasswordLoadedState(
       currentPassword: currentPassword,
       newPassword: newPassword,
       passwordConfirm: passwordConfirm,
@@ -66,7 +66,7 @@ class ChangePasswordBloc
   ) {
     passwordConfirm = event.passwordConfirm;
 
-    emit(ChangePasswordChangeState(
+    emit(ChangePasswordLoadedState(
       currentPassword: currentPassword,
       newPassword: newPassword,
       passwordConfirm: passwordConfirm,

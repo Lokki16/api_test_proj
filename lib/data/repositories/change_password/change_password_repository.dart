@@ -1,10 +1,9 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangePasswordRepository {
-  final url = 'http://143.198.174.245/Auth/changePassword';
+  final _url = 'http://143.198.174.245/Auth/changePassword';
 
   Future<bool> changePassword(
     String currentPassword,
@@ -16,7 +15,7 @@ class ChangePasswordRepository {
       final accessToken = sharedPreferences.getString('accessToken');
 
       final response = await http.post(
-        Uri.parse(url),
+        Uri.parse(_url),
         headers: {
           'Accept': 'application/json',
           'content-type': 'application/json',

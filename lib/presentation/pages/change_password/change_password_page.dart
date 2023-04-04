@@ -28,7 +28,7 @@ class ChangePasswordPage extends StatelessWidget {
                 return const Center(child: Text('Error!'));
               }
 
-              if (state is ChangePasswordChangeState) {
+              if (state is ChangePasswordLoadedState) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -64,9 +64,9 @@ class ChangePasswordPage extends StatelessWidget {
                             ChangePasswordRepository();
                         final status =
                             await authorizationRepository.changePassword(
-                          state.currentPassword!,
-                          state.newPassword!,
-                          state.passwordConfirm!,
+                          state.currentPassword,
+                          state.newPassword,
+                          state.passwordConfirm,
                         );
                         status
                             ? Get.toNamed(AppRoutes.routeToHomePage)

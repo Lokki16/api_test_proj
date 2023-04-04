@@ -5,14 +5,14 @@ abstract class AuthorizationEvent {}
 
 class AuthorizationFetchEvent extends AuthorizationEvent {}
 
-class AuthorizationUsernameChangeEvent extends AuthorizationEvent {
+class AuthorizationUsernameEvent extends AuthorizationEvent {
   final String username;
 
-  AuthorizationUsernameChangeEvent(this.username);
+  AuthorizationUsernameEvent(this.username);
 }
 
-class AuthorizationPasswordChangeEvent extends AuthorizationEvent {
+class AuthorizationPasswordEvent extends AuthorizationEvent {
   final String password;
 
-  AuthorizationPasswordChangeEvent(this.password);
+  AuthorizationPasswordEvent(this.password);
 }

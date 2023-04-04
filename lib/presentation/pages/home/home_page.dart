@@ -50,11 +50,7 @@ class HomePage extends StatelessWidget {
                               children: [
                                 const Text('Body: '),
                                 Expanded(
-                                  child: Text(
-                                    data.body,
-                                    softWrap: true,
-                                  ),
-                                ),
+                                    child: Text(data.body, softWrap: true)),
                               ],
                             ),
                             Row(

@@ -4,11 +4,11 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthorizationRepository {
-  final url = 'http://143.198.174.245/Auth/login';
+  final _url = 'http://143.198.174.245/Auth/login';
 
   Future<bool> postAuthorization(String username, String password) async {
     try {
-      final response = await http.post(Uri.parse(url),
+      final response = await http.post(Uri.parse(_url),
           body: jsonEncode({'username': username, 'password': password}),
           headers: {
             'Accept': 'application/json',
@@ -20,6 +20,7 @@ class AuthorizationRepository {
             UserModel.fromJson(json.decode(response.body)).accessToken;
         final refreshToken =
             UserModel.fromJson(json.decode(response.body)).refreshToken;
+
         final sharedPreferences = await SharedPreferences.getInstance();
         sharedPreferences.setString('accessToken', accessToken);
         sharedPreferences.setString('refreshToken', refreshToken);

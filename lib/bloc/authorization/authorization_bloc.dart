@@ -11,8 +11,8 @@ class AuthorizationBloc extends Bloc<AuthorizationEvent, AuthorizationState> {
   AuthorizationBloc({this.username = '', this.password = ''})
       : super(AuthorizationInitialState()) {
     on<AuthorizationFetchEvent>(_fetchEvent);
-    on<AuthorizationUsernameChangeEvent>(_usernameChangeEvent);
-    on<AuthorizationPasswordChangeEvent>(_passwordChangeEvent);
+    on<AuthorizationUsernameEvent>(_usernameEvent);
+    on<AuthorizationPasswordEvent>(_passwordEvent);
   }
 
   void _fetchEvent(
@@ -22,15 +22,14 @@ class AuthorizationBloc extends Bloc<AuthorizationEvent, AuthorizationState> {
     emit(AuthorizationInitialState());
 
     try {
-      await Future.delayed(const Duration(milliseconds: 500));
       emit(AuthorizationLoadedState());
     } catch (e) {
       emit(AuthorizationErrorState());
     }
   }
 
-  void _usernameChangeEvent(
-    AuthorizationUsernameChangeEvent event,
+  void _usernameEvent(
+    AuthorizationUsernameEvent event,
     Emitter<AuthorizationState> emit,
   ) async {
     username = event.username;
@@ -38,8 +37,8 @@ class AuthorizationBloc extends Bloc<AuthorizationEvent, AuthorizationState> {
     emit(AuthorizationLoadedState(username: username, password: password));
   }
 
-  void _passwordChangeEvent(
-    AuthorizationPasswordChangeEvent event,
+  void _passwordEvent(
+    AuthorizationPasswordEvent event,
     Emitter<AuthorizationState> emit,
   ) async {
     password = event.password;

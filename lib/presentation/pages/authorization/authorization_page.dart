@@ -36,14 +36,14 @@ class AuthorizationPage extends StatelessWidget {
                       label: 'Login',
                       onChanged: (username) => context
                           .read<AuthorizationBloc>()
-                          .add(AuthorizationUsernameChangeEvent(username)),
+                          .add(AuthorizationUsernameEvent(username)),
                     ),
                     SizedBox(height: 20.h),
                     CustomTextField(
                       label: 'Password',
                       onChanged: (password) => context
                           .read<AuthorizationBloc>()
-                          .add(AuthorizationPasswordChangeEvent(password)),
+                          .add(AuthorizationPasswordEvent(password)),
                     ),
                     SizedBox(height: 50.h),
                     CustomButton(

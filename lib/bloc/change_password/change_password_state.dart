@@ -5,16 +5,16 @@ abstract class ChangePasswordState {}
 
 class ChangePasswordInitialState extends ChangePasswordState {}
 
-class ChangePasswordChangeState extends ChangePasswordState {
-  final String? currentPassword;
-  final String? newPassword;
-  final String? passwordConfirm;
+class ChangePasswordErrorState extends ChangePasswordState {}
 
-  ChangePasswordChangeState({
-    this.currentPassword,
-    this.newPassword,
-    this.passwordConfirm,
+class ChangePasswordLoadedState extends ChangePasswordState {
+  final String currentPassword;
+  final String newPassword;
+  final String passwordConfirm;
+
+  ChangePasswordLoadedState({
+    this.currentPassword = '',
+    this.newPassword = '',
+    this.passwordConfirm = '',
   });
 }
-
-class ChangePasswordErrorState extends ChangePasswordState {}
