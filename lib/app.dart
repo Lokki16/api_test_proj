@@ -1,4 +1,5 @@
 import 'package:api_test_proj/bloc/authorization/authorization_bloc.dart';
+import 'package:api_test_proj/bloc/change_password/change_password_bloc.dart';
 import 'package:api_test_proj/bloc/notification/notification_bloc.dart';
 import 'package:api_test_proj/data/navigation/routes.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 AuthorizationBloc()..add(AuthorizationFetchEvent())),
+        BlocProvider(
+            create: (context) =>
+                ChangePasswordBloc()..add(ChangePasswordFetchEvent())),
         BlocProvider(
             create: (context) =>
                 NotificationBloc()..add(NotificationFetchEvent())),

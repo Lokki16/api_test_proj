@@ -16,7 +16,9 @@ class AuthorizationBloc extends Bloc<AuthorizationEvent, AuthorizationState> {
   }
 
   void _fetchEvent(
-      AuthorizationFetchEvent event, Emitter<AuthorizationState> emit) async {
+    AuthorizationFetchEvent event,
+    Emitter<AuthorizationState> emit,
+  ) async {
     emit(AuthorizationInitialState());
 
     try {
@@ -27,15 +29,21 @@ class AuthorizationBloc extends Bloc<AuthorizationEvent, AuthorizationState> {
     }
   }
 
-  void _usernameChangeEvent(AuthorizationUsernameChangeEvent event,
-      Emitter<AuthorizationState> emit) async {
+  void _usernameChangeEvent(
+    AuthorizationUsernameChangeEvent event,
+    Emitter<AuthorizationState> emit,
+  ) async {
     username = event.username;
+
     emit(AuthorizationLoadedState(username: username, password: password));
   }
 
-  void _passwordChangeEvent(AuthorizationPasswordChangeEvent event,
-      Emitter<AuthorizationState> emit) async {
+  void _passwordChangeEvent(
+    AuthorizationPasswordChangeEvent event,
+    Emitter<AuthorizationState> emit,
+  ) async {
     password = event.password;
+
     emit(AuthorizationLoadedState(username: username, password: password));
   }
 }

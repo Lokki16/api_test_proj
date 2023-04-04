@@ -1,8 +1,10 @@
 import 'package:api_test_proj/bloc/notification/notification_bloc.dart';
+import 'package:api_test_proj/data/navigation/routes.dart';
 import 'package:api_test_proj/presentation/widgets/custom_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -11,6 +13,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(AppRoutes.routeToChangePasswordPage),
+            icon: const Icon(Icons.settings),
+          ),
+        ]),
         body: BlocBuilder<NotificationBloc, NotificationState>(
           builder: (context, state) {
             if (state is NotificationInitialState) {
@@ -41,7 +49,12 @@ class HomePage extends StatelessWidget {
                             Row(
                               children: [
                                 const Text('Body: '),
-                                Text(data.body),
+                                Expanded(
+                                  child: Text(
+                                    data.body,
+                                    softWrap: true,
+                                  ),
+                                ),
                               ],
                             ),
                             Row(

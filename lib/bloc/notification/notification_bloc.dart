@@ -12,7 +12,9 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   }
 
   void _notificationFetchEvent(
-      NotificationFetchEvent event, Emitter<NotificationState> emit) async {
+    NotificationFetchEvent event,
+    Emitter<NotificationState> emit,
+  ) async {
     emit(NotificationInitialState());
 
     try {

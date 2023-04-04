@@ -54,6 +54,7 @@ class AuthorizationPage extends StatelessWidget {
                             AuthorizationRepository();
                         final status = await authorizationRepository
                             .postAuthorization(state.username, state.password);
+
                         status
                             ? Get.toNamed(AppRoutes.routeToHomePage)
                             : showSimpleDialog(title: 'Error!');
