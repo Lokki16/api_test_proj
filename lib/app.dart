@@ -1,18 +1,16 @@
 import 'package:api_test_proj/presentation/template/template.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  bool status = false;
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    getStatus();
-
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+            create: (context) =>
+                InitialRouteBloc()..add(InitialRouteFetchEvent())),
         BlocProvider(
             create: (context) =>
                 AuthorizationBloc()..add(AuthorizationFetchEvent())),
@@ -23,22 +21,19 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 NotificationBloc()..add(NotificationFetchEvent())),
       ],
-      child: ScreenUtilInit(
-          builder: (context, child) => MaterialApp(
-                title: 'Test',
-                navigatorKey: Get.key,
-                routes: AppRoutes.getRoutes,
-                initialRoute: status
-                    ? AppRoutes.routeToHomePage
-                    : AppRoutes.routeToAuthorizationPage,
-                debugShowCheckedModeBanner: false,
-              )),
-    );
-  }
+      child: ScreenUtilInit(builder: (context, child) {
+        final isAuthorized = context.read<InitialRouteBloc>().isAuthorized;
 
-  void getStatus() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final token = sharedPreferences.getString('refreshToken');
-    status = await RenewTokenRepository().renewToken(token);
+        return MaterialApp(
+          title: 'Test',
+          navigatorKey: Get.key,
+          routes: AppRoutes.getRoutes,
+          initialRoute: isAuthorized
+              ? AppRoutes.routeToHomePage
+              : AppRoutes.routeToAuthorizationPage,
+          debugShowCheckedModeBanner: false,
+        );
+      }),
+    );
   }
 }

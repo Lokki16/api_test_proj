@@ -3,6 +3,7 @@ library template.dart;
 // packages
 export 'package:flutter/material.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
+export 'package:shared_preferences/shared_preferences.dart';
 export 'package:get/get.dart';
 
 // navigation
@@ -19,6 +20,7 @@ export '../../data/models/notification/notification_model.dart';
 export '../../data/models/user/user_model.dart';
 
 // bloc
+export '../../bloc/initial_route/initial_route_bloc.dart';
 export '../../bloc/authorization/authorization_bloc.dart';
 export '../../bloc/change_password/change_password_bloc.dart';
 export '../../bloc/notification/notification_bloc.dart';
