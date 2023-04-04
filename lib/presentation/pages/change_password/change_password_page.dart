@@ -34,6 +34,12 @@ class ChangePasswordPage extends StatelessWidget {
                   children: [
                     CustomTextField(
                       label: 'Current password',
+                      obscureText: state.isObscureCurrentPassword,
+                      suffixIcon: Icons.remove_red_eye_outlined,
+                      suffixOnPressed: () => context
+                          .read<ChangePasswordBloc>()
+                          .add(ObscureCurrentPasswordEvent(
+                              !state.isObscureCurrentPassword)),
                       onChanged: (currentPassword) => context
                           .read<ChangePasswordBloc>()
                           .add(ChangeCurrentPasswordEvent(
@@ -42,6 +48,12 @@ class ChangePasswordPage extends StatelessWidget {
                     SizedBox(height: 20.h),
                     CustomTextField(
                       label: 'New password',
+                      obscureText: state.isObscureNewPassword,
+                      suffixIcon: Icons.remove_red_eye_outlined,
+                      suffixOnPressed: () => context
+                          .read<ChangePasswordBloc>()
+                          .add(ObscureNewPasswordEvent(
+                              !state.isObscureNewPassword)),
                       onChanged: (newPassword) => context
                           .read<ChangePasswordBloc>()
                           .add(
@@ -50,6 +62,12 @@ class ChangePasswordPage extends StatelessWidget {
                     SizedBox(height: 20.h),
                     CustomTextField(
                       label: 'Password confirm',
+                      obscureText: state.isObscurePasswordConfirm,
+                      suffixIcon: Icons.remove_red_eye_outlined,
+                      suffixOnPressed: () => context
+                          .read<ChangePasswordBloc>()
+                          .add(ObscurePasswordConfirmEvent(
+                              !state.isObscurePasswordConfirm)),
                       onChanged: (passwordConfirm) => context
                           .read<ChangePasswordBloc>()
                           .add(ChangePasswordConfirmEvent(

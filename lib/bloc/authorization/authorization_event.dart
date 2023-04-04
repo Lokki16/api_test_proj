@@ -16,3 +16,9 @@ class AuthorizationPasswordEvent extends AuthorizationEvent {
 
   AuthorizationPasswordEvent(this.password);
 }
+
+class AuthorizationObsecurePasswordEvent extends AuthorizationEvent {
+  final bool isObscurePassword;
+
+  AuthorizationObsecurePasswordEvent(this.isObscurePassword);
+}

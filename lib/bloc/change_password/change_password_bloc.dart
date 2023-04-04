@@ -9,16 +9,25 @@ class ChangePasswordBloc
   String currentPassword;
   String newPassword;
   String passwordConfirm;
+  bool isObscureCurrentPassword;
+  bool isObscureNewPassword;
+  bool isObscurePasswordConfirm;
 
   ChangePasswordBloc({
     this.currentPassword = '',
     this.newPassword = '',
     this.passwordConfirm = '',
+    this.isObscureCurrentPassword = true,
+    this.isObscureNewPassword = true,
+    this.isObscurePasswordConfirm = true,
   }) : super(ChangePasswordInitialState()) {
     on<ChangePasswordFetchEvent>(_fetchEvent);
     on<ChangeCurrentPasswordEvent>(_changeCurrentPasswordEvent);
     on<ChangeNewPasswordEvent>(_changeNewPasswordEvent);
     on<ChangePasswordConfirmEvent>(_changePasswordConfirmEvent);
+    on<ObscureCurrentPasswordEvent>(_obscureCurrentPasswordEvent);
+    on<ObscureNewPasswordEvent>(_obscureNewPasswordEvent);
+    on<ObscurePasswordConfirmEvent>(_obscurePasswordConfirmEvent);
   }
 
   void _fetchEvent(
@@ -44,6 +53,9 @@ class ChangePasswordBloc
       currentPassword: currentPassword,
       newPassword: newPassword,
       passwordConfirm: passwordConfirm,
+      isObscureCurrentPassword: isObscureCurrentPassword,
+      isObscureNewPassword: isObscureNewPassword,
+      isObscurePasswordConfirm: isObscurePasswordConfirm,
     ));
   }
 
@@ -57,6 +69,9 @@ class ChangePasswordBloc
       currentPassword: currentPassword,
       newPassword: newPassword,
       passwordConfirm: passwordConfirm,
+      isObscureCurrentPassword: isObscureCurrentPassword,
+      isObscureNewPassword: isObscureNewPassword,
+      isObscurePasswordConfirm: isObscurePasswordConfirm,
     ));
   }
 
@@ -70,6 +85,57 @@ class ChangePasswordBloc
       currentPassword: currentPassword,
       newPassword: newPassword,
       passwordConfirm: passwordConfirm,
+      isObscureCurrentPassword: isObscureCurrentPassword,
+      isObscureNewPassword: isObscureNewPassword,
+      isObscurePasswordConfirm: isObscurePasswordConfirm,
+    ));
+  }
+
+  void _obscureCurrentPasswordEvent(
+    ObscureCurrentPasswordEvent event,
+    Emitter<ChangePasswordState> emit,
+  ) async {
+    isObscureCurrentPassword = event.isObscureCurrentPassword;
+
+    emit(ChangePasswordLoadedState(
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+      passwordConfirm: passwordConfirm,
+      isObscureCurrentPassword: isObscureCurrentPassword,
+      isObscureNewPassword: isObscureNewPassword,
+      isObscurePasswordConfirm: isObscurePasswordConfirm,
+    ));
+  }
+
+  void _obscureNewPasswordEvent(
+    ObscureNewPasswordEvent event,
+    Emitter<ChangePasswordState> emit,
+  ) async {
+    isObscureNewPassword = event.isObscureNewPassword;
+
+    emit(ChangePasswordLoadedState(
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+      passwordConfirm: passwordConfirm,
+      isObscureCurrentPassword: isObscureCurrentPassword,
+      isObscureNewPassword: isObscureNewPassword,
+      isObscurePasswordConfirm: isObscurePasswordConfirm,
+    ));
+  }
+
+  void _obscurePasswordConfirmEvent(
+    ObscurePasswordConfirmEvent event,
+    Emitter<ChangePasswordState> emit,
+  ) async {
+    isObscurePasswordConfirm = event.isObscurePasswordConfirm;
+
+    emit(ChangePasswordLoadedState(
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+      passwordConfirm: passwordConfirm,
+      isObscureCurrentPassword: isObscureCurrentPassword,
+      isObscureNewPassword: isObscureNewPassword,
+      isObscurePasswordConfirm: isObscurePasswordConfirm,
     ));
   }
 }

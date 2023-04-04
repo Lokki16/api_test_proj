@@ -41,6 +41,12 @@ class AuthorizationPage extends StatelessWidget {
                     SizedBox(height: 20.h),
                     CustomTextField(
                       label: 'Password',
+                      obscureText: state.isObscurePassword,
+                      suffixIcon: Icons.remove_red_eye_outlined,
+                      suffixOnPressed: () => context
+                          .read<AuthorizationBloc>()
+                          .add(AuthorizationObsecurePasswordEvent(
+                              !state.isObscurePassword)),
                       onChanged: (password) => context
                           .read<AuthorizationBloc>()
                           .add(AuthorizationPasswordEvent(password)),

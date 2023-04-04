@@ -22,3 +22,21 @@ class ChangePasswordConfirmEvent extends ChangePasswordEvent {
 
   ChangePasswordConfirmEvent({required this.passwordConfirm});
 }
+
+class ObscureCurrentPasswordEvent extends ChangePasswordEvent {
+  final bool isObscureCurrentPassword;
+
+  ObscureCurrentPasswordEvent(this.isObscureCurrentPassword);
+}
+
+class ObscureNewPasswordEvent extends ChangePasswordEvent {
+  final bool isObscureNewPassword;
+
+  ObscureNewPasswordEvent(this.isObscureNewPassword);
+}
+
+class ObscurePasswordConfirmEvent extends ChangePasswordEvent {
+  final bool isObscurePasswordConfirm;
+
+  ObscurePasswordConfirmEvent(this.isObscurePasswordConfirm);
+}
