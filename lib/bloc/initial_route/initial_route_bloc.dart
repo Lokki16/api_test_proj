@@ -5,19 +5,21 @@ part 'initial_route_event.dart';
 part 'initial_route_state.dart';
 
 class InitialRouteBloc extends Bloc<InitialRouteEvent, InitialRouteState> {
-  bool isAuthorized;
-
-  InitialRouteBloc({this.isAuthorized = false})
-      : super(InitialRouteInitialState(isAuthorized: false)) {
-    on<InitialRouteEvent>(_initialRouteEvent);
+  InitialRouteBloc() : super(InitialRouteInitialState()) {
+    on<InitialRouteFetchEvent>(_initialRouteFetchEvent);
   }
 
-  void _initialRouteEvent(
+  void _initialRouteFetchEvent(
     InitialRouteEvent event,
     Emitter<InitialRouteState> emit,
   ) async {
-    isAuthorized = await RenewTokenRepository().renewToken();
+    emit(InitialRouteInitialState());
 
-    emit(InitialRouteInitialState(isAuthorized: isAuthorized));
+    try {
+      final isAuthorized = await RenewTokenRepository().renewToken();
+      emit(InitialRouteLoadedState(isAuthorized: isAuthorized));
+    } catch (e) {
+      emit(InitialRouteErrorState());
+    }
   }
 }

@@ -6,34 +6,50 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            create: (context) =>
-                InitialRouteBloc()..add(InitialRouteFetchEvent())),
-        BlocProvider(
-            create: (context) =>
-                AuthorizationBloc()..add(AuthorizationFetchEvent())),
-        BlocProvider(
-            create: (context) =>
-                ChangePasswordBloc()..add(ChangePasswordFetchEvent())),
-        BlocProvider(
-            create: (context) =>
-                NotificationBloc()..add(NotificationFetchEvent())),
-      ],
-      child: ScreenUtilInit(builder: (context, child) {
-        final isAuthorized = context.read<InitialRouteBloc>().isAuthorized;
-
-        return MaterialApp(
+    return ScreenUtilInit(
+      builder: (context, child) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) =>
+                  InitialRouteBloc()..add(InitialRouteFetchEvent())),
+          BlocProvider(
+              create: (context) =>
+                  AuthorizationBloc()..add(AuthorizationFetchEvent())),
+          BlocProvider(
+              create: (context) =>
+                  ChangePasswordBloc()..add(ChangePasswordFetchEvent())),
+          BlocProvider(
+              create: (context) =>
+                  NotificationBloc()..add(NotificationFetchEvent())),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Test',
           navigatorKey: Get.key,
           routes: AppRoutes.getRoutes,
-          initialRoute: isAuthorized
-              ? AppRoutes.routeToHomePage
-              : AppRoutes.routeToAuthorizationPage,
-          debugShowCheckedModeBanner: false,
-        );
-      }),
+          home: Scaffold(
+            body: BlocBuilder<InitialRouteBloc, InitialRouteState>(
+              builder: (context, state) {
+                if (state is InitialRouteInitialState) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (state is InitialRouteErrorState) {
+                  return const AuthorizationPage();
+                }
+
+                if (state is InitialRouteLoadedState) {
+                  return state.isAuthorized
+                      ? const HomePage()
+                      : const AuthorizationPage();
+                }
+
+                return const SizedBox.shrink();
+              },
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

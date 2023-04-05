@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:api_test_proj/data/models/user/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,7 +10,7 @@ class RenewTokenRepository {
     try {
       final sharedPreferences = await SharedPreferences.getInstance();
       final accessToken = sharedPreferences.getString('accessToken');
-      final refreshToken = sharedPreferences.getString('refreshToken');
+      final token = sharedPreferences.getString('refreshToken');
 
       final response = await http.post(
         Uri.parse(_url),
@@ -18,8 +19,12 @@ class RenewTokenRepository {
           'content-type': 'application/json',
           'Authorization': 'Bearer $accessToken',
         },
-        body: jsonEncode({'token': refreshToken}),
+        body: jsonEncode({'token': token}),
       );
+
+      final refreshToken =
+          UserModel.fromJson(json.decode(response.body)).refreshToken;
+      sharedPreferences.setString('refreshToken', refreshToken);
 
       return response.statusCode == 200;
     } catch (e) {
